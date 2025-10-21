@@ -16,3 +16,22 @@ questionBlocks.forEach((block, index) => {
     });
   });
 });
+function displayResult() {
+  let counts = { explorer: 0, artist: 0, leader: 0, thinker: 0 };
+
+  Object.values(userAnswers).forEach(value => {
+    counts[value] = (counts[value] || 0) + 1;
+  });
+
+  let topCategory = Object.keys(counts).reduce((a, b) =>
+    counts[a] > counts[b] ? a : b
+  );
+
+  const resultContainer = document.getElementById('result-container');
+  resultContainer.textContent = `You are a ${topCategory.toUpperCase()}! 🎉`;
+}
+
+document
+  .getElementById('result-btn')
+  .addEventListener('click', displayResult);
+
